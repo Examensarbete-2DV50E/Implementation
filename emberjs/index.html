@@ -5,6 +5,7 @@
 		<title>ember.js • TodoMVC</title>
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<script type="text/x-handlebars" data-template-name="todo-list">
@@ -31,10 +32,14 @@
 		</script>
 		<script type="text/x-handlebars" data-template-name="todos">
 			<section id="todoapp">
+				{{#if loggedIn}}
 				<header id="header">
 					<h1>todos</h1>
 					{{todo-input id="new-todo" type="text" value=newTitle action="createTodo" placeholder="What needs to be done?"}}
-				</header>
+                    <form class="form-horizontal" {{action "logout" on="submit"}}>
+                        <button type="submit" id="auth-button" class="logout" >logout</button>
+                    </form>
+                </header>
 					{{outlet}}
 					{{#if length}}
 						<footer id="footer">
@@ -55,6 +60,16 @@
 							{{/if}}
 						</footer>
 					{{/if}}
+				{{else}}
+                    <header id="header">
+                    <form class="form-horizontal" {{action "login" on="submit"}}>
+                        <button type="submit" id="auth-button" class="login">login</button>
+                        <h1>Login</h1>
+						{{input value=username placeholder="username" type="text" autofocus="true"}}
+						{{input value=password placeholder="password" type="password"}}
+                    </form>
+                </header>
+				{{/if}}
 			</section>
 			<footer id="info">
 				<p>Double-click to edit a todo</p>
@@ -79,6 +94,7 @@
 		<script src="js/app.js"></script>
 		<script src="js/router.js"></script>
 		<script src="js/models/todo.js"></script>
+		<script src="js/models/user.js"></script>
 		<script src="js/controllers/todos_controller.js"></script>
 		<script src="js/controllers/todos_list_controller.js"></script>
 		<script src="js/controllers/todo_controller.js"></script>

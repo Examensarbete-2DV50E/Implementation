@@ -4,6 +4,24 @@
 
 	Todos.TodosController = Ember.ArrayController.extend({
 		actions: {
+			login: function () {
+				var scope = this;
+				Todos.User.login(scope.username, scope.password).then(function (validLogin) {
+						if (validLogin) {
+							scope.setProperties({
+								loggedIn:true
+							});
+						}
+					}).catch(function (error) {
+						console.log('Error: ', error);
+					});
+			},
+			logout: function () {
+				var scope = this;
+				scope.setProperties({
+					loggedIn:false
+				});
+			},
 			createTodo: function () {
 				var title, todo;
 
@@ -35,6 +53,7 @@
 
 		remaining: Ember.computed.filterBy('model', 'isCompleted', false),
 		completed: Ember.computed.filterBy('model', 'isCompleted', true),
+		loggedIn: false,
 
 		allAreDone: function (key, value) {
 			if (value !== undefined) {
