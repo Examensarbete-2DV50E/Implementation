@@ -13,9 +13,10 @@
 		});
 	};
 	Todos.User.logout = function() {
-		setTimeout(function () {
-			return true;
-		}, 1000);
+	  return new Promise(function (resolve) {
+	    setTimeout(function () {
+	        resolve(true);
+	    }, 1000);
+	  })
 	}
 })();
-

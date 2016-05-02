@@ -2,7 +2,7 @@ module.exports = {
   entry: "./js/app.js",
   output: {
     path: "./build",
-    publicPath: "/build/",
+    publicPath: "./",
     filename: "build.js"
   },
   module: {

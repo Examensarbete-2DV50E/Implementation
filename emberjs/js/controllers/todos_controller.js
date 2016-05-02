@@ -18,8 +18,12 @@
 			},
 			logout: function () {
 				var scope = this;
-				scope.setProperties({
-					loggedIn:false
+				Todos.User.logout().then(function(data) {
+					if(data) {
+						scope.setProperties({
+							loggedIn:false
+						});
+					}
 				});
 			},
 			createTodo: function () {
