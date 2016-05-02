@@ -74,7 +74,9 @@
 				this.password = '';
 			},
 			logoutUser: function () {
-				this.loggedIn = userStorage.logout(1);
+				userStorage.login(this.username,this.password).then(function(data){
+					app.$set('loggedIn', data);
+				});
 			},
 
 			addTodo: function () {

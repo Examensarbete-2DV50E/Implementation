@@ -15,8 +15,12 @@ var UserActions = {
     });
   },
   logout: function() {
-    AppDispatcher.dispatch({
-      actionType: UserConstants.USER_LOGOUT,
+    db.logout().then(function(data) {
+      if(data) {
+        AppDispatcher.dispatch({
+          actionType: UserConstants.USER_LOGOUT,
+        });
+      }
     });
   },
 };

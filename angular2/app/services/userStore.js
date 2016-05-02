@@ -22,7 +22,13 @@ var UserStore = (function () {
       this.user.loggedIn = user.loggedIn;
     };
     UserStore.prototype.logout = function () {
-        this.user.loggedIn = false;
+      var user = this.user;
+      db.logout().then(function(data) {
+        if(data) {
+          user.loggedIn = false;
+        }
+      });
+      this.user.loggedIn = user.loggedIn;
     };
     UserStore.prototype.isUserLoggedIn = function (username,password) {
         return this.user.loggedIn;

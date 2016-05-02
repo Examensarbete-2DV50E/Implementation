@@ -20,7 +20,11 @@
       });
     },
     logout: function () {
-        userLoggedIn = false;;
+      return db.logout().then(function(data) {
+        if(data) {
+          return false;
+        }
+      });
     },
 		isUserLoggedIn: function (auth) {
 				return userLoggedIn;
